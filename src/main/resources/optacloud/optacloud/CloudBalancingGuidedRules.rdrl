@@ -5,5 +5,7 @@ import java.lang.Number;
 rule "CloudBalancingGuidedRules"
 	dialect "mvel"
 	when
-	then
+		$computer : Computer( $cpuPower : cpuPower)
+		$requiredCpuPowerTotal : Number( intValue() > $cpuPower )
+			then
 end
