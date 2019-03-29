@@ -5,7 +5,7 @@ import java.lang.Number;
 rule "HardScoreNetworkBandwith"
 	dialect "mvel"
 	when
-		$computer : Computer( $memory : memory)
+		$computer : Computer( $memory : memory, $networkBandwidth : networkBandwidth)
 		$requiredMemoryTotal : Number( intValue() > $memory ) from accumulate ( Process( computer == $computer , $requiredMemory : requiredMemory),
 			sum($requiredMemory)) 
 	then
