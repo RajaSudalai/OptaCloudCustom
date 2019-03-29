@@ -5,9 +5,9 @@ import java.lang.Number;
 rule "HardScoreMemory"
 	dialect "mvel"
 	when
-		$computer : Computer( $cpuPower : cpuPower)
-		$requiredCpuPowerTotal : Number( intValue() > $cpuPower ) from accumulate ( Process( computer == $computer , $requiredCpuPower : requiredCpuPower),
-			sum($requiredCpuPower)) 
+		$computer : Computer( $memory : memory)
+		$requiredMemoryTotal : Number( intValue() > $memory ) from accumulate ( Process( computer == $computer , $requiredMemory : requiredMemory),
+			sum($requiredMemory)) 
 	then
-		scoreHolder.addHardConstraintMatch(kcontext, $cpuPower - $requiredCpuPowerTotal.intValue());
+		scoreHolder.addHardConstraintMatch(kcontext, $memory - $requiredMemoryTotal.intValue());
 end
