@@ -1,0 +1,9 @@
+package optacloud.optacloud;
+
+import java.lang.Number;
+
+rule "CloudBalancingGuidedRules"
+	dialect "mvel"
+	when
+	then
+end
