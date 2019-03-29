@@ -1,0 +1,13 @@
+package optacloud.optacloud;
+
+import java.lang.Number;
+
+rule "HardScoreMemory"
+	dialect "mvel"
+	when
+		$computer : Computer( $cpuPower : cpuPower)
+		$requiredCpuPowerTotal : Number( intValue() > $cpuPower ) from accumulate ( Process( computer == $computer , $requiredCpuPower : requiredCpuPower),
+			sum($requiredCpuPower)) 
+	then
+		scoreHolder.addHardConstraintMatch(kcontext, $cpuPower - $requiredCpuPowerTotal.intValue());
+end
