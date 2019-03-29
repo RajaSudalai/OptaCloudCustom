@@ -1,0 +1,13 @@
+package optacloud.optacloud;
+
+import java.lang.Number;
+
+rule "HardScoreNetworkBandwith"
+	dialect "mvel"
+	when
+		$computer : Computer( $memory : memory)
+		$requiredMemoryTotal : Number( intValue() > $memory ) from accumulate ( Process( computer == $computer , $requiredMemory : requiredMemory),
+			sum($requiredMemory)) 
+	then
+		scoreHolder.addHardConstraintMatch(kcontext, $memory - $requiredMemoryTotal.intValue());
+end
