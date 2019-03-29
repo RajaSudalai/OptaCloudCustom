@@ -2,7 +2,7 @@ package optacloud.optacloud;
 
 import java.lang.Number;
 
-rule "CloudBalancingGuidedRules"
+rule "HardScoreCpuPownerCapacity"
 	dialect "mvel"
 	when
 		$computer : Computer( $cpuPower : cpuPower)
