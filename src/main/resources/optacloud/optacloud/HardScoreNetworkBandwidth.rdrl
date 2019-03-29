@@ -5,9 +5,9 @@ import java.lang.Number;
 rule "HardScoreNetworkBandwidth"
 	dialect "mvel"
 	when
-		$computer : Computer( $memory : memory, $networkBandwidth : networkBandwidth)
-		$requiredMemoryTotal : Number( intValue() > $memory ) from accumulate ( Process( computer == $computer , $requiredMemory : requiredMemory),
-			sum($requiredMemory)) 
+		$computer : Computer( $networkBandwidth : networkBandwidth)
+		$requiredNetworkBandwidthTotal : Number( intValue() > $networkBandwidth ) from accumulate ( Process( computer == $computer , $requiredNetworkBandwidth : requiredNetworkBandwidth),
+			sum($requiredNetworkBandwidth)) 
 	then
-		scoreHolder.addHardConstraintMatch(kcontext, $memory - $requiredMemoryTotal.intValue());
+		scoreHolder.addHardConstraintMatch(kcontext, $networkBandwidth - $requiredNetworkBandwidthTotal.intValue());
 end
